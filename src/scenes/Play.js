@@ -10,6 +10,7 @@ class Play extends Phaser.Scene{
         this.load.image('rocket', 'assets/rocket.png');
         this.load.spritesheet('explosion', 'assets/explosion.png', {frameWidth:64, frameHeight:32,
             startFrame:0, endFrame:9});
+        this.load.image('foregroundUI', 'assets/frame.png');
     }
 
     create() {
@@ -20,20 +21,16 @@ class Play extends Phaser.Scene{
         this.p1Rocket = new Rocket(this, game.config.width/2,
             game.config.height - borderUISize - borderPadding, 'rocket').setOrigin(0.5, 0);
         this.ship1 = new Ship(this, 200, 160, 'ship', 0, 30).setOrigin(0, 0);
+            this.ship1.setScale(0.9);
         this.ship2 = new Ship(this, 300, 210, 'ship', 0, 20).setOrigin(0, 0);
+            this.ship2.setScale(0.9);
         this.ship3 = new Ship(this, 400, 250, 'ship', 0, 10).setOrigin(0, 0);
-        
-        // Green UI BG
-        this.add.rectangle(0, borderUISize + borderPadding, game.config.width,
-            borderUISize * 2, 0x00FF00).setOrigin(0,0)
+            this.ship3.setScale(0.9);
 
-        // White Borders
-        this.add.rectangle(0, 0, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0 ,0);
-	    this.add.rectangle(0, game.config.height - borderUISize,
-            game.config.width, borderUISize, 0xFFFFFF).setOrigin(0 ,0);
-	    this.add.rectangle(0, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0 ,0);
-	    this.add.rectangle(game.config.width - borderUISize, 0,
-            borderUISize, game.config.height, 0xFFFFFF).setOrigin(0 ,0);
+        this.fancyship = new NewShip(this, 300, 160, 'ship', 0, 50).setOrigin(0, 0);
+            this.fancyship.setScale(0.9);
+
+        let border = this.add.image(0, 0, 'foregroundUI').setOrigin(0,0);
 
         // Keyboard Inputs
         keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
@@ -91,6 +88,7 @@ class Play extends Phaser.Scene{
             this.ship1.update();
             this.ship2.update();
             this.ship3.update();
+            this.fancyship.update();
         }
 
         // Checks for collisions
