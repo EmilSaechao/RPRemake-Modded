@@ -86,11 +86,6 @@ class Play extends Phaser.Scene{
             this.scene.start("menuScene");
         }
 
-        if (this.gameOver) {
-            let elapsed = this.clock.getElapsed
-            console.log(elapsed)
-        }
-
         if(!this.gameOver) {
             this.p1Rocket.update();
             this.ship1.update();
@@ -102,23 +97,14 @@ class Play extends Phaser.Scene{
         if (this.checkCollision(this.p1Rocket, this.ship1)) {
             this.p1Rocket.reset();
             this.shipExplode(this.ship1);
-            console.log(this.clock.delay);
-            this.clock.delay += 5000;
-            console.log(this.clock.delay);
         }
         if (this.checkCollision(this.p1Rocket, this.ship2)) {
             this.p1Rocket.reset();
             this.shipExplode(this.ship2);
-            console.log(this.clock.delay);
-            this.clock.delay += 5000;
-            console.log(this.clock.delay);
         }
         if (this.checkCollision(this.p1Rocket, this.ship3)) {
             this.p1Rocket.reset();
             this.shipExplode(this.ship3);
-            console.log(this.clock.delay);
-            this.clock.delay += 5000;
-            console.log(this.clock.delay);
         }
     }
 
