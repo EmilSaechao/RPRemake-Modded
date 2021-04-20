@@ -6,6 +6,8 @@ class Play extends Phaser.Scene{
 
     preload() {
         this.load.image('Watery', 'assets/Watery.png');
+        this.load.image('Wood', 'assets/Wood.png');
+        this.load.image('Windy', 'assets/Windy.png')
         this.load.image('rocket', 'assets/rocket.png');
         this.load.spritesheet('explosion', 'assets/explosion.png', {frameWidth:64, frameHeight:32,
             startFrame:0, endFrame:9});
@@ -24,9 +26,9 @@ class Play extends Phaser.Scene{
         //Rocket + Ships
         this.p1Rocket = new Rocket(this, game.config.width/2,
             game.config.height - borderUISize - borderPadding, 'rocket').setOrigin(0.5, 0);
-        this.ship1 = new Card(this, 200, 160, 'Watery', 0, 30).setOrigin(0, 0);
+        this.ship1 = new Card(this, 200, 160, 'Windy', 0, 30).setOrigin(0, 0);
             this.ship1.setScale(0.9);
-        this.ship2 = new Card(this, 300, 210, 'Watery', 0, 20).setOrigin(0, 0);
+        this.ship2 = new Card(this, 300, 210, 'Wood', 0, 20).setOrigin(0, 0);
             this.ship2.setScale(0.9);
         this.ship3 = new Card(this, 400, 250, 'Watery', 0, 10).setOrigin(0, 0);
             this.ship3.setScale(0.9);
@@ -50,15 +52,21 @@ class Play extends Phaser.Scene{
         this.p1Score = 0;
         let scoreConfig = {
             fontFamily: 'Courier',
+            fontSize: '40px',
+            color: 'white',
+            align: 'center',
+            padding: {top:2, bottom:2},
+            fixedWidth: 90
+          }
+        let gameOverConfig = {
+            fontFamily: 'Courier',
             fontSize: '28px',
             backgroundColor: '#F3B141',
             color: '#843605',
             align: 'center',
-            padding: {top:5, bottom:5},
-            fixedWidth: 100
+            padding: {top:5, bottom:5}
           }
-        this.scoreLeft = this.add.text(borderUISize + borderPadding,
-            borderUISize + borderPadding*2, this.p1Score, scoreConfig);
+        this.scoreLeft = this.add.text(80, 10, this.p1Score, scoreConfig);
         
         this.gameOver = false;
         
@@ -66,17 +74,17 @@ class Play extends Phaser.Scene{
         scoreConfig.fixedWidth = 0;
         this.clock = this.time.delayedCall(game.settings.gameTimer, () => {
             this.add.text(game.config.width/2, game.config.height/2,
-                'GAME OVER', scoreConfig).setOrigin(0.5);
+                'GAME OVER', gameOverConfig).setOrigin(0.5);
             this.add.text(game.config.width/2, game.config.height/2 + 64,
-                'Press [R] to Restart or ← for Menu', scoreConfig).setOrigin(0.5);
+                'Press [R] to Restart or ← for Menu', gameOverConfig).setOrigin(0.5);
             this.gameOver = true;
         }, null, this);
     }
 
     update() {
-        this.foreground.tilePositionX -= 2.5;
+        this.foreground.tilePositionX -= 2.75;
         this.trees.tilePositionX -= 0.25;
-        this.kingPengy.tilePositionX -= 0.5;
+        this.kingPengy.tilePositionX -= 0.75;
 
         // check key input for restart
         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)) {
