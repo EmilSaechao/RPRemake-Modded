@@ -5,30 +5,31 @@ class Play extends Phaser.Scene{
     }
 
     preload() {
-        this.load.image('starfield', 'assets/starfield.png');
-        this.load.image('ship', 'assets/spaceship.png');
+        this.load.image('Watery', 'assets/Watery.png');
         this.load.image('rocket', 'assets/rocket.png');
         this.load.spritesheet('explosion', 'assets/explosion.png', {frameWidth:64, frameHeight:32,
             startFrame:0, endFrame:9});
         this.load.image('foregroundUI', 'assets/frame.png');
+        this.load.image('BG1', 'assets/BG_Layer1.png');
+        this.load.image('BG2', 'assets/BG_Layer2.png');
+        this.load.image('KingPengy', 'assets/playground.png');
     }
 
     create() {
-        // Starfield BG
-        this.starfield = this.add.tileSprite(0,0,640,480, 'starfield').setOrigin(0,0);
+        // Parallax BG Layers
+        this.trees = this.add.tileSprite(0,0,640,480, 'BG1').setOrigin(0,0);
+        this.kingPengy = this.add.tileSprite(0,0,640,480, 'KingPengy').setOrigin(0,0);
+        this.foreground = this.add.tileSprite(0,0,640,480, 'BG2').setOrigin(0,0);
 
         //Rocket + Ships
         this.p1Rocket = new Rocket(this, game.config.width/2,
             game.config.height - borderUISize - borderPadding, 'rocket').setOrigin(0.5, 0);
-        this.ship1 = new Ship(this, 200, 160, 'ship', 0, 30).setOrigin(0, 0);
+        this.ship1 = new Card(this, 200, 160, 'Watery', 0, 30).setOrigin(0, 0);
             this.ship1.setScale(0.9);
-        this.ship2 = new Ship(this, 300, 210, 'ship', 0, 20).setOrigin(0, 0);
+        this.ship2 = new Card(this, 300, 210, 'Watery', 0, 20).setOrigin(0, 0);
             this.ship2.setScale(0.9);
-        this.ship3 = new Ship(this, 400, 250, 'ship', 0, 10).setOrigin(0, 0);
+        this.ship3 = new Card(this, 400, 250, 'Watery', 0, 10).setOrigin(0, 0);
             this.ship3.setScale(0.9);
-
-        this.fancyship = new NewShip(this, 300, 160, 'ship', 0, 50).setOrigin(0, 0);
-            this.fancyship.setScale(0.9);
 
         let border = this.add.image(0, 0, 'foregroundUI').setOrigin(0,0);
 
@@ -73,7 +74,9 @@ class Play extends Phaser.Scene{
     }
 
     update() {
-        this.starfield.tilePositionX -= 4;
+        this.foreground.tilePositionX -= 2.5;
+        this.trees.tilePositionX -= 0.25;
+        this.kingPengy.tilePositionX -= 0.5;
 
         // check key input for restart
         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)) {
@@ -88,7 +91,6 @@ class Play extends Phaser.Scene{
             this.ship1.update();
             this.ship2.update();
             this.ship3.update();
-            this.fancyship.update();
         }
 
         // Checks for collisions
