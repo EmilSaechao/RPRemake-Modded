@@ -6,11 +6,12 @@ class Play extends Phaser.Scene{
     preload() {
         this.load.image('Watery', 'assets/Watery.png');
         this.load.image('Wood', 'assets/Wood.png');
-        this.load.image('Windy', 'assets/Windy.png')
+        this.load.image('Windy', 'assets/Windy.png');
+        this.load.image('Kero', 'assets/Kero.png');
         this.load.image('rocket', 'assets/rocket.png');
         this.load.spritesheet('explosion', 'assets/explosion.png', {frameWidth:64, frameHeight:32,
             startFrame:0, endFrame:9});
-        this.load.image('gameOver', 'assets/Game_Over.png')
+        this.load.image('gameOver', 'assets/Game_Over.png');
         this.load.image('foregroundUI', 'assets/frame.png');
         this.load.image('BG1', 'assets/BG_Layer1.png');
         this.load.image('BG2', 'assets/BG_Layer2.png');
@@ -18,7 +19,7 @@ class Play extends Phaser.Scene{
     }
 
     create() {
-
+        // Plays Background Music
         this.sound.play('BGMusic');
 
         // Parallax BG Layers
@@ -26,7 +27,7 @@ class Play extends Phaser.Scene{
         this.kingPengy = this.add.tileSprite(0,0,640,480, 'KingPengy').setOrigin(0,0);
         this.foreground = this.add.tileSprite(0,0,640,480, 'BG2').setOrigin(0,0);
 
-        //Rocket + Ships
+        // Staff + Cards (Rocket + Ships)
         this.p1Rocket = new Rocket(this, game.config.width/2,
             410, 'rocket').setOrigin(0.5, 0);
         this.p1Rocket.scale = 0.5;
@@ -36,6 +37,8 @@ class Play extends Phaser.Scene{
             this.ship2.setScale(0.9);
         this.ship3 = new Card(this, 400, 250, 'Watery', 0, 10).setOrigin(0, 0);
             this.ship3.setScale(0.9);
+        this.ship4 = new Card(this, 400, 250, 'Kero', 0, 50).setOrigin(0, 0);
+            this.ship4.setScale(0.5);
 
         let border = this.add.image(0, 0, 'foregroundUI').setOrigin(0,0);
 
