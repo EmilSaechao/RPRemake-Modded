@@ -38,7 +38,6 @@ class Play extends Phaser.Scene{
         this.ship3 = new Card(this, 400, 250, 'Watery', 0, 10).setOrigin(0, 0);
             this.ship3.setScale(0.9);
         this.ship4 = new Card(this, 400, 250, 'Kero', 0, 50).setOrigin(0, 0);
-            this.ship4.setScale(0.5);
 
         let border = this.add.image(0, 0, 'foregroundUI').setOrigin(0,0);
 
@@ -141,6 +140,10 @@ class Play extends Phaser.Scene{
         if (this.checkCollision(this.p1Rocket, this.ship3)) {
             this.p1Rocket.reset();
             this.shipExplode(this.ship3);
+        }
+        if (this.checkCollision(this.p1Rocket, this.ship4)) {
+            this.p1Rocket.reset();
+            this.shipExplode(this.ship4);
         }
     }
 
