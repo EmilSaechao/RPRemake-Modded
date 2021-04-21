@@ -10,6 +10,7 @@ class Play extends Phaser.Scene{
         this.load.image('rocket', 'assets/rocket.png');
         this.load.spritesheet('explosion', 'assets/explosion.png', {frameWidth:64, frameHeight:32,
             startFrame:0, endFrame:9});
+        this.load.image('gameOver', 'assets/Game_Over.png')
         this.load.image('foregroundUI', 'assets/frame.png');
         this.load.image('BG1', 'assets/BG_Layer1.png');
         this.load.image('BG2', 'assets/BG_Layer2.png');
@@ -17,6 +18,9 @@ class Play extends Phaser.Scene{
     }
 
     create() {
+
+        this.sound.play('BGMusic');
+
         // Parallax BG Layers
         this.trees = this.add.tileSprite(0,0,640,480, 'BG1').setOrigin(0,0);
         this.kingPengy = this.add.tileSprite(0,0,640,480, 'KingPengy').setOrigin(0,0);
@@ -82,10 +86,7 @@ class Play extends Phaser.Scene{
         this.clock = this.time.addEvent({
             delay: game.settings.gameTimer,
             callback: () => {
-                this.add.text(game.config.width/2, game.config.height/2,
-                    'GAME OVER', gameOverConfig).setOrigin(0.5);
-                this.add.text(game.config.width/2, game.config.height/2 + 64,
-                    'Press [R] to Restart or ← for Menu', gameOverConfig).setOrigin(0.5);
+                this.add.image(0,0, 'gameOver').setOrigin(0,0);
                 this.gameOver = true;
             },
             args: null,
@@ -98,6 +99,7 @@ class Play extends Phaser.Scene{
     }
 
     update() {
+        // Timer Updater
         let seconds = Phaser.Math.RoundTo(this.clock.getRemainingSeconds(), 0);
         this.timerString.text = seconds;
 
@@ -108,9 +110,11 @@ class Play extends Phaser.Scene{
 
         // check key input for restart
         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)) {
+            this.sound.stopByKey('BGMusic');
             this.scene.restart();
         }
         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyLEFT)) {
+            this.sound.stopByKey('BGMusic');
             this.scene.start("menuScene");
         }
 
