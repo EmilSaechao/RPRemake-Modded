@@ -28,7 +28,8 @@ class Play extends Phaser.Scene{
 
         //Rocket + Ships
         this.p1Rocket = new Rocket(this, game.config.width/2,
-            game.config.height - borderUISize - borderPadding, 'rocket').setOrigin(0.5, 0);
+            410, 'rocket').setOrigin(0.5, 0);
+        this.p1Rocket.scale = 0.5;
         this.ship1 = new Card(this, 200, 160, 'Windy', 0, 30).setOrigin(0, 0);
             this.ship1.setScale(0.9);
         this.ship2 = new Card(this, 300, 210, 'Wood', 0, 20).setOrigin(0, 0);
