@@ -1,4 +1,3 @@
-
 class Play extends Phaser.Scene{
     constructor() {
         super("playScene");
@@ -55,8 +54,21 @@ class Play extends Phaser.Scene{
             fontSize: '40px',
             color: 'white',
             align: 'center',
-            padding: {top:2, bottom:2},
+            padding: {top:3, bottom:3},
             fixedWidth: 90
+          }
+        this.scoreLeft = this.add.text(80, 10, this.p1Score, scoreConfig);
+
+        this.gameOver = false;
+        
+        // Timer
+        let timerConfig = {
+            fontFamily: 'Courier',
+            fontSize: '40px',
+            color: 'white',
+            align: 'center',
+            padding: {top:4, bottom:4},
+            fixedWidth: 75
           }
         let gameOverConfig = {
             fontFamily: 'Courier',
@@ -66,22 +78,30 @@ class Play extends Phaser.Scene{
             align: 'center',
             padding: {top:5, bottom:5}
           }
-        this.scoreLeft = this.add.text(80, 10, this.p1Score, scoreConfig);
         
-        this.gameOver = false;
-        
-        // 60-Sec Timer
-        scoreConfig.fixedWidth = 0;
-        this.clock = this.time.delayedCall(game.settings.gameTimer, () => {
-            this.add.text(game.config.width/2, game.config.height/2,
-                'GAME OVER', gameOverConfig).setOrigin(0.5);
-            this.add.text(game.config.width/2, game.config.height/2 + 64,
-                'Press [R] to Restart or ← for Menu', gameOverConfig).setOrigin(0.5);
-            this.gameOver = true;
-        }, null, this);
+        this.clock = this.time.addEvent({
+            delay: game.settings.gameTimer,
+            callback: () => {
+                this.add.text(game.config.width/2, game.config.height/2,
+                    'GAME OVER', gameOverConfig).setOrigin(0.5);
+                this.add.text(game.config.width/2, game.config.height/2 + 64,
+                    'Press [R] to Restart or ← for Menu', gameOverConfig).setOrigin(0.5);
+                this.gameOver = true;
+            },
+            args: null,
+            callbackScope: this,
+            startAt: 0
+        })
+
+        this.timerString = this.add.text(282, 46, ' ', timerConfig);
+
     }
 
     update() {
+        let seconds = Phaser.Math.RoundTo(this.clock.getRemainingSeconds(), 0);
+        this.timerString.text = seconds;
+
+        // Parallax Background Movement
         this.foreground.tilePositionX -= 2.75;
         this.trees.tilePositionX -= 0.25;
         this.kingPengy.tilePositionX -= 0.75;

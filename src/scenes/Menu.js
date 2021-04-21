@@ -26,7 +26,7 @@ class Menu extends Phaser.Scene{
           game.settings = {
             spaceshipSpeed: 3,
             specialSpeed: 5,
-            gameTimer: 10000    
+            gameTimer: 15000    
           }
           this.sound.play('sfx_select');
           this.scene.start('playScene');    
