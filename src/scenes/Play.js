@@ -22,7 +22,7 @@ class Play extends Phaser.Scene{
         // Plays Background Music
         this.sound.play('BGMusic');
 
-        // Parallax BG Layers
+        // Background Layers
         this.trees = this.add.tileSprite(0,0,640,480, 'BG1').setOrigin(0,0);
         this.kingPengy = this.add.tileSprite(0,0,640,480, 'KingPengy').setOrigin(0,0);
         this.foreground = this.add.tileSprite(0,0,640,480, 'BG2').setOrigin(0,0);
@@ -37,8 +37,9 @@ class Play extends Phaser.Scene{
             this.ship2.setScale(0.9);
         this.ship3 = new Card(this, 400, 250, 'Watery', 0, 10).setOrigin(0, 0);
             this.ship3.setScale(0.9);
-        this.ship4 = new Card(this, 400, 250, 'Kero', 0, 50).setOrigin(0, 0);
+        this.ship4 = new Kero(this, 200, 120, 'Kero', 0, 50).setOrigin(0, 0);
 
+        // Play Scene UI
         let border = this.add.image(0, 0, 'foregroundUI').setOrigin(0,0);
 
         // Keyboard Inputs
@@ -68,7 +69,7 @@ class Play extends Phaser.Scene{
 
         this.gameOver = false;
         
-        // Timer
+        // Timer + Game Over
         let timerConfig = {
             fontFamily: 'Courier',
             fontSize: '40px',
@@ -111,7 +112,7 @@ class Play extends Phaser.Scene{
         this.trees.tilePositionX -= 0.25;
         this.kingPengy.tilePositionX -= 0.75;
 
-        // check key input for restart
+        // Checking Key Input on Game Over
         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)) {
             this.sound.stopByKey('BGMusic');
             this.scene.restart();
@@ -126,6 +127,7 @@ class Play extends Phaser.Scene{
             this.ship1.update();
             this.ship2.update();
             this.ship3.update();
+            this.ship4.update();
         }
 
         // Checks for collisions

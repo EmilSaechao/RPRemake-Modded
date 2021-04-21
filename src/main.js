@@ -14,6 +14,12 @@ POINTS BREAKDOWN
     I used free-to-use SFX and music I found online to match, trying to use sparkly and 'pretty' ones
     to get as far from sci-fi as I could.
 
+20: Create a new spaceship type (w/ new artwork) that's smaller, moves faster, and is worth more points.
+    One of the iconic characters from the series is Keroberos (aka Kero), who's Sakura's companion.
+    He's smug, snarky, and extremely speedy, which made him the perfect icon to base a new enemy after.
+    I duplicated the original 'Ship' (renamed Card) class and named it Kero, so his unique speed also
+    changes depending on difficulty.
+
 10: Display the time remaining (in seconds) on the screen.
     This took me longer than I thought but by using the timer and some of Phaser's Math functions,
     I have the time remaining in the top center of the screen inside of the bow for maximum visibility.
@@ -40,7 +46,6 @@ let config = {
 }
 
 let game = new Phaser.Game(config);
-let highScore = 0
 
 let borderUISize = game.config.height / 15;
 let borderPadding = borderUISize / 3;
