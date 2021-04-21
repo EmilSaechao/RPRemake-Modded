@@ -4,8 +4,6 @@ Project Title: Sakura's Card Capture! - Rocker Patrol Modded
 Date: 4.20.2021
 Hours to Completion: 12
 
-Hold on testing...
-
 Aesthetic and references based on the late 90's anime, Cardcaptor Sakura. Original manga by Clamp.
 
 POINTS BREAKDOWN
