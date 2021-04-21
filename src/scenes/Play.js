@@ -12,7 +12,7 @@ class Play extends Phaser.Scene{
         this.load.spritesheet('explosion', 'assets/explosion.png', {frameWidth:64, frameHeight:32,
             startFrame:0, endFrame:9});
         this.load.image('gameOver', 'assets/Game_Over.png');
-        this.load.image('foregroundUI', 'assets/frame.png');
+        this.load.image('foregroundUI', 'assets/Frame.png');
         this.load.image('BG1', 'assets/BG_Layer1.png');
         this.load.image('BG2', 'assets/BG_Layer2.png');
         this.load.image('KingPengy', 'assets/playground.png');
